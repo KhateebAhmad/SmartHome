@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.learn</groupId>
-    <artifactId>ProjectSample</artifactId>
+    <artifactId>SmartHome</artifactId>
     <version>2.4.6.8.15.16.23.42</version>
     <packaging>jar</packaging>
     <properties>
@@ -20,4 +20,5 @@
         </dependency>
 
     </dependencies>
+    <name>SmartHome</name>
 </project>

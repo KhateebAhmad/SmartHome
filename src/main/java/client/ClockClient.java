@@ -12,8 +12,7 @@ import clientui.ClockUI;
  */
 public class ClockClient extends Client {
 
-    private final String WARM = "Warm";
-    private boolean isWarming = false;
+    private final String Check = "Check";
 
     /**
      * clockClock Client Constructor.
@@ -28,22 +27,16 @@ public class ClockClient extends Client {
     /**
      * sends a message to warm the clock.
      */
-    public void warm() {
-        if (!isWarming) {
-            String a = sendMessage(WARM);
+    public void checkTime() {
+            String a = sendMessage(Check);
             if (a.equals(OK)) {
-                isWarming = true;
-                ui.updateArea("Clock is Warming");
+                ui.updateArea("Checking Time");
             }
-        } else {
-            ui.updateArea("Clock already Warming");
-        }
     }
 
     @Override
     public void updatePoll(String msg) {
-        if (msg.equals("Clock is 100% warmed.")) {
-            isWarming = false;
+        if (msg.equals("Clock is on")) {
         }
     }
 
@@ -51,6 +44,5 @@ public class ClockClient extends Client {
     public void disable() {
         super.disable();
         ui = new ClockUI(this);
-        isWarming = false;
     }
 }

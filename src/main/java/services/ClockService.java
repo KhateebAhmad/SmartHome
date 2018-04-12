@@ -11,12 +11,12 @@ import serviceui.ServiceUI;
 public class ClockService extends Service {
 
     private final Timer timer;
-    private int percentHot;
+    private int currentTime;
 
     public ClockService(String name) {
         super(name, "_clock._udp.local.");
         timer = new Timer();
-        percentHot = 0;
+        currentTime = 0;
         ui = new ServiceUI(this, name);
     }
 
@@ -24,31 +24,34 @@ public class ClockService extends Service {
     public void performAction(String a) {
         if (a.equals("get_status")) {
             sendBack(getStatus());
-        } else if (a.equals("Warm")) {
-            timer.schedule(new RemindTask(), 0, 2000);
+        } else if (a.equals("Check")) {
+            timer.schedule(new RemindTask(), 0, 10);
             sendBack("OK");
-            ui.updateArea("Warming Clock");
+            ui.updateArea("Checking the Time");
         } else {
             sendBack(BAD_COMMAND + " - " + a);
         }
     }
 
     class RemindTask extends TimerTask {
-
         @Override
         public void run() {
-            if (percentHot < 100) {
-                percentHot += 10;
+            if (currentTime >= 0 && currentTime <= 22) {
+                currentTime += 1;
             }
+            else if (currentTime == 23){
+                currentTime = 0;
+            }
+            getStatus();
         }
     }
 
     @Override
     public String getStatus() {
-        return "Clock is " + percentHot + "% warmed.";
+        return "The time is: " + currentTime + ":00.";
     }
 
     public static void main(String[] args) {
-        new ClockService("Dominic's");
+        new ClockService("Aaron's");
     }
 }

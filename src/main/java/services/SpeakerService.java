@@ -35,6 +35,8 @@ public class SpeakerService extends Service{
             
         } else if("ChangeChannel".equals(action)){
             
+        } else{
+            sendBack(BAD_COMMAND + " - " + action);
         }//To change body of generated methods, choose Tools | Templates.
     }
 

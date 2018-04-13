@@ -35,17 +35,17 @@ public class NightLightService extends Service {
     public void receiveTime(String jsonS){
         Gson gson = new Gson();
          ClockData cd = gson.fromJson(jsonS, ClockData.class);
-         if(cd.timeclock == 6 && lightStatus == 0){
+         if(cd.timeclock == 6 && lightStatus == 1){
              try{
-                performAction("On");
+                performAction("Off");
              }catch(Exception e){
                  ui.updateArea("The following error occurred: "+e.toString());
                  ui.updateArea("Ensure that the nightlight and clock services are running and are able to communicate to SmartHome Manager");
              }
          }
-         else if(cd.timeclock == 19 && lightStatus == 1){
+         else if(cd.timeclock == 19 && lightStatus == 0){
              try{
-                performAction("Off");
+                performAction("On");
              }catch(Exception e){
                  ui.updateArea("The following error occurred: "+e.toString());
                  ui.updateArea("Ensure that the nightlight and clock services are running and are able to communicate to SmartHome Manager");

@@ -118,7 +118,6 @@ public abstract class Service extends Thread {
             out.println(a);
             out.close();
         } catch (IOException e) {
-            ui.updateArea("Client not accessible");
         }
     }
 

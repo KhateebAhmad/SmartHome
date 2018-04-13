@@ -21,7 +21,7 @@ import client.Client;
 /**
  * The Class ClientUI.
  *
- * @author dominic
+ * @author Aaron
  */
 public abstract class ClientUI extends JPanel implements ActionListener {
 

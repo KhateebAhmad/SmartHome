@@ -17,7 +17,7 @@ import clientui.ClientUI;
 /**
  * Abstract super class for all clients.
  *
- * @author dominic
+ * @author SmartHome
  */
 public abstract class Client {
 
@@ -136,14 +136,17 @@ public abstract class Client {
     public String getServiceType() {
         return serviceType;
     }
-
+    /*
+    *PollServer delay set to 3 seconds to update clock quicker and more precise.
+    *
+    */
     public void setUp(String server, int port) {
         System.out.println(serverHost + " " + server + " " + serverPort + " " + port);
         serverHost = server;
         serverPort = port;
         initialized = true;
         timer = new Timer();
-        timer.scheduleAtFixedRate(new PollServer(), 6000, 20000);
+        timer.scheduleAtFixedRate(new PollServer(), 6000, 3000);
     }
 
     public JPanel returnUI() {
@@ -186,8 +189,7 @@ public abstract class Client {
                     if (!msg.equals(null)) {
                         ui.updateArea(msg);
                     }
-                    updatePoll(msg);
-                }
+                    updatePoll(msg);           }
                 out.close();
                 pollSocket.close();
             } catch (Exception ioe) {

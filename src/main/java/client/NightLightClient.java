@@ -3,14 +3,14 @@
  */
 package client;
 
-import clientui.LightUI;
+import clientui.NightLightUI;
 
 /**
  * Bed Client.
  *
- * @author dominic
+ * @author Aaron
  */
-public class LightClient extends Client {
+public class NightLightClient extends Client {
 
     private final String ON = "On";
     private final String OFF = "Off";
@@ -18,17 +18,17 @@ public class LightClient extends Client {
     private boolean lightCondition = false;
 
     /**
-     * Bed Client Constructor.
+     * NightLight Client Constructor.
      */
-    public LightClient() {
+    public NightLightClient() {
         super();
         serviceType = "_light._udp.local.";
-        ui = new LightUI(this);
-        name = "Home Lighting";
+        ui = new NightLightUI(this);
+        name = "Nightlights";
     }
 
     /**
-     * sends a message to change condition of the light.
+     * sends a message to change condition of the light and update ui.
      */
     public void on() {
         if (!lightCondition) {
@@ -58,7 +58,7 @@ public class LightClient extends Client {
     @Override
     public void disable() {
         super.disable();
-        ui = new LightUI(this);
+        ui = new NightLightUI(this);
         lightCondition = false;
     }
 }

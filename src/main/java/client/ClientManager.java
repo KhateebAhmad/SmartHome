@@ -22,8 +22,7 @@ public class ClientManager implements ServiceListener {
 
     public ClientManager() {
         clients = new ArrayList<>();
-        clients.add(new BedClient());
-        clients.add(new LightClient());
+        clients.add(new NightLightClient());
         clients.add(new ClockClient());
         try {
             jmdns = JmDNS.create(InetAddress.getLocalHost());

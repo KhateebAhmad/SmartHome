@@ -2,15 +2,15 @@ package clientui;
 
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
-import client.LightClient;
+import client.NightLightClient;
 
-public class LightUI extends ClientUI {
+public class NightLightUI extends ClientUI {
 
     private static final long serialVersionUID = -5318589393275157185L;
     public JButton on;
-    private final LightClient parent;
+    private final NightLightClient parent;
 
-    public LightUI(LightClient lightClient) {
+    public NightLightUI(NightLightClient lightClient) {
         super(lightClient);
         parent = lightClient;
         init();
@@ -22,11 +22,11 @@ public class LightUI extends ClientUI {
         on = new JButton("Turn On");
         scroll.setBounds(5, 40, UIConstants.COMPONENTWIDTH, 300);
         add(new JButton[]{on});
-//        off = new JButton("Off");
-//        scroll.setBounds(5, 40, UIConstants.COMPONENTWIDTH, 300);
-//        add(new JButton[]{off});
     }
 
+    /*
+    *Alternate text of button to turn on/off and call the 'on' methos in paren class
+    */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == on) {

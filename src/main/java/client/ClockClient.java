@@ -8,11 +8,12 @@ import clientui.ClockUI;
 /**
  * clockClock Client.
  *
- * @author dominic
+ * @author Aaron
  */
 public class ClockClient extends Client {
 
     private final String Check = "Check";
+    private final String Reset = "Reset";
 
     /**
      * clockClock Client Constructor.
@@ -25,12 +26,22 @@ public class ClockClient extends Client {
     }
 
     /**
-     * sends a message to warm the clock.
+     * sends a message to start and check the time.
      */
     public void checkTime() {
             String a = sendMessage(Check);
             if (a.equals(OK)) {
                 ui.updateArea("Checking Time");
+            }
+    }
+    
+    /**
+     * sends a message to reset the clock time.
+     */
+    public void resetTime() {
+            String a = sendMessage(Reset);
+            if (a.equals(OK)) {
+                ui.updateArea("Resetting Time");
             }
     }
 

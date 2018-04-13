@@ -5,6 +5,8 @@
  */
 package services;
 
+import com.google.gson.Gson;
+import data.TVData;
 import serviceui.ServiceUI;
 
 /**
@@ -14,9 +16,10 @@ import serviceui.ServiceUI;
 public class SpeakerService extends Service{
     
     private int speakerVolume;
+    TVService tvService = new TVService("SmartTV");
 
     public SpeakerService(String name) {
-        super(name, "_bed._udp.local.");
+        super(name, "_speaker._udp.local.");
         ui = new ServiceUI(this, name);
         speakerVolume = 20;
     }
@@ -25,19 +28,36 @@ public class SpeakerService extends Service{
     protected void performAction(String action) {
         if("VolumeUP".equals(action)){
             speakerVolume =+ 10;
+            sendBack("OK");
+            ui.updateArea("Speaker Volume increased");
         } else if("VolumeDown".equals(action)){
             speakerVolume =- 10;
+            sendBack("OK");
+            ui.updateArea("Speaker volume decreased");
         } else if("Mute".equals(action)){
             speakerVolume = 0;
+            sendBack("OK");
+            ui.updateArea("Speaker muted");
         } else if("TurnOnTV".equals(action)){
-            
+            sendBack("OK");
+            tvFunctions(action);
         } else if("TurnOffTV".equals(action)){
-            
+            sendBack("OK");
+            tvFunctions(action);
         } else if("ChangeChannel".equals(action)){
-            
+            sendBack("OK");
+            tvFunctions(action);
         } else{
             sendBack(BAD_COMMAND + " - " + action);
-        }//To change body of generated methods, choose Tools | Templates.
+        }
+    }
+    
+    public void tvFunctions(String functionToPerform){
+        TVData tvData = new TVData();
+        tvData.setActionToPerform(functionToPerform);
+        Gson gson = new Gson();
+        String params = gson.toJson(tvData);
+        tvService.performAction(params);
     }
 
     @Override

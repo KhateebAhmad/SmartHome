@@ -5,28 +5,28 @@
  */
 package clientui;
 
-import client.ClockClient;
+import client.SpeakerClient;
 import client.TVClient;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
-import javax.swing.JTextField;
 
 /**
  *
  * @author khateebahmad
  */
-public class TVUI extends ClientUI{
+public class SpeakerUI extends ClientUI{
     
     private static final long serialVersionUID = -5318589393275157185L;
-    private JButton ON;
-    private JButton OFF;
-    private final TVClient parent;
+    private JButton volumeUP;
+    private JButton volumeDown;
+    private JButton mute;
+    private final SpeakerClient parent;
     
 
 
-    public TVUI(TVClient tvClient) {
-        super(tvClient);
-        parent = tvClient;
+    public SpeakerUI(SpeakerClient speakerClient) {
+        super(speakerClient);
+        parent = speakerClient;
         init();
     }
 
@@ -36,11 +36,13 @@ public class TVUI extends ClientUI{
     @Override
     public void init() {
         super.init();
-        ON = new JButton("ON");
-        OFF = new JButton("OFF");
+        volumeUP = new JButton("VolumeUP");
+        volumeDown = new JButton("VolumeDown");
+        mute = new JButton("Mute");
         scroll.setBounds(5, 40, UIConstants.COMPONENTWIDTH, 300);
-        add(new JButton[]{ON});
-        add(new JButton[]{OFF});
+        add(new JButton[]{volumeUP});
+        add(new JButton[]{volumeDown});
+        add(new JButton[]{mute});
         
     }
 
@@ -49,10 +51,12 @@ public class TVUI extends ClientUI{
     */
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == ON) {
-            parent.turnON();
-        } else if (e.getSource() == OFF) {
-            parent.turnOFF();
+        if (e.getSource() == volumeUP) {
+            parent.volumeUP();
+        } else if (e.getSource() == volumeDown) {
+            parent.volumeDown();
+        } else if (e.getSource() == mute) {
+            parent.speakerMute();
         }
     }
     

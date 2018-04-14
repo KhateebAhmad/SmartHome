@@ -7,10 +7,9 @@ package client;
 
 import clientui.SpeakerUI;
 
-
 /**
  *
- * @author farhanahmad
+ * @author khateebahmad
  */
 public class SpeakerClient extends Client{
     

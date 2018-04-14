@@ -14,13 +14,7 @@ package data;
 public class TVData {
     
     public String actionToPerform;
-
-    
-    public String getActionToPerform() {
-        return actionToPerform;
-    }
-
-    public void setActionToPerform(String actionToPerform) {
-        this.actionToPerform = actionToPerform;
+    public TVData(String action){
+        this.actionToPerform = action;
     }
 }

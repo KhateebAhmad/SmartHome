@@ -28,24 +28,43 @@ public class TVService extends Service{
 
     @Override
     protected void performAction(String data) {
-        Gson gson = new Gson();
-        TVData tvData = gson.fromJson(data, TVData.class);
-         String action = tvData.getActionToPerform();
-         
-        if("TurnOnTV".equals(action)){
+        
+        if("TurnOnTV".equals(data)){
             tvStatus = "ON";
             sendBack("OK");
             ui.updateArea("TV turned ON");
-        } else if("TurnOffTV".equals(action)){
+        } else if("TurnOffTV".equals(data)){
             tvStatus = "OFF";
             sendBack("OK");
             ui.updateArea("TV turned OFF");
-        } else if("ChangeChannel".equals(action)){
+        } else if("ChangeChannel".equals(data)){
             channel =+ 1; 
             sendBack("OK");
             ui.updateArea("Channel changed");
         } else{
-            sendBack(BAD_COMMAND + " - " + action);
+            sendBack(BAD_COMMAND + " - " + data);
+        }
+    }
+    
+    
+    protected void receiveAction(String data) {
+        Gson gson = new Gson();
+        TVData tvData = gson.fromJson(data, TVData.class);
+         
+        if("TurnOnTV".equals(tvData.actionToPerform)){
+            tvStatus = "ON";
+            sendBack("OK");
+            ui.updateArea("TV turned ON");
+        } else if("TurnOffTV".equals(tvData.actionToPerform)){
+            tvStatus = "OFF";
+            sendBack("OK");
+            ui.updateArea("TV turned OFF");
+        } else if("ChangeChannel".equals(tvData.actionToPerform)){
+            channel =+ 1; 
+            sendBack("OK");
+            ui.updateArea("Channel changed");
+        } else{
+            sendBack(BAD_COMMAND + " - " + tvData.actionToPerform);
         }
     }
 

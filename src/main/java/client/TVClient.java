@@ -15,8 +15,9 @@ import clientui.TVUI;
  */
 public class TVClient extends Client{
     
-    private final String ON = "ON";
-    private final String OFF = "OFF";
+    private final String ON = "TurnOnTV";
+    private final String OFF = "TurnOffTV";
+    private final String CHANGE_CHANNEL = "ChangeChannel";
 
     /**
      * TV Client Constructor.
@@ -45,6 +46,16 @@ public class TVClient extends Client{
             String a = sendMessage(OFF);
             if (a.equals(OK)) {
                 ui.updateArea("Turning OFF");
+            }
+    }
+    
+    /**
+     * sends a message to change TV channel.
+     */
+    public void changeChannel() {
+            String a = sendMessage(CHANGE_CHANNEL);
+            if (a.equals(OK)) {
+                ui.updateArea("Changing TV Channel");
             }
     }
 

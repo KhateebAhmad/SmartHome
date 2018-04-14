@@ -17,6 +17,9 @@ public class SpeakerClient extends Client{
     private final String INCREASE_VOLUME = "VolumeUP";
     private final String DECREASE_VOLUME = "VolumeDown";
     private final String MUTE = "Mute";
+    private final String TURNONTV = "TurnOnTV";
+    private final String TURNOFFTV = "TurnOffTV";
+    private final String CHANGE_CHANNEL = "ChangeChannel";
     
     /**
      * Speaker Client Constructor.
@@ -57,7 +60,38 @@ public class SpeakerClient extends Client{
                 ui.updateArea("Speaker muted");
             }
     }
+    
+    /**
+     * sends a message to turn TV ON.
+     */
+    public void turnONTV() {
+            String a = sendMessage(TURNONTV);
+            if (a.equals(OK)) {
+                ui.updateArea("Turning TV ON");
+            }
+    }
+    
+    /**
+     * sends a message to turn TV OFF.
+     */
+    public void turnOFFTV() {
+            String a = sendMessage(TURNOFFTV);
+            if (a.equals(OK)) {
+                ui.updateArea("Turning TV OFF");
+            }
+    }
 
+    /**
+     * sends a message to change TV channel.
+     */
+    public void changeChannel() {
+            String a = sendMessage(CHANGE_CHANNEL);
+            if (a.equals(OK)) {
+                ui.updateArea("Changing Channel");
+            }
+    }
+    
+    
     @Override
     public void updatePoll(String msg) {
         if (msg.equals("Speaker is ON")) {

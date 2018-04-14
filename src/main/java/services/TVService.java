@@ -18,29 +18,33 @@ public class TVService extends Service{
     
     
     private String tvStatus;
-    private int channel = 0;
+    private int channel;
 
     public TVService(String name) {
         super(name, "_tv._udp.local.");
         ui = new ServiceUI(this, name);
         tvStatus = "OFF";
+        channel = 0;
     }
 
     @Override
     protected void performAction(String data) {
-        
         if("TurnOnTV".equals(data)){
             tvStatus = "ON";
             sendBack("OK");
             ui.updateArea("TV turned ON");
         } else if("TurnOffTV".equals(data)){
             tvStatus = "OFF";
+            channel = 0;
             sendBack("OK");
             ui.updateArea("TV turned OFF");
         } else if("ChangeChannel".equals(data)){
-            channel =+ 1; 
+            channel = channel + 1; 
             sendBack("OK");
             ui.updateArea("Channel changed");
+        } else if ("get_status".equals(data)){
+            sendBack("OK");
+            ui.updateArea(getStatus());
         } else{
             sendBack(BAD_COMMAND + " - " + data);
         }
@@ -57,12 +61,16 @@ public class TVService extends Service{
             ui.updateArea("TV turned ON");
         } else if("TurnOffTV".equals(tvData.actionToPerform)){
             tvStatus = "OFF";
+            channel = 0;
             sendBack("OK");
             ui.updateArea("TV turned OFF");
         } else if("ChangeChannel".equals(tvData.actionToPerform)){
-            channel =+ 1; 
+            channel = channel + 1; 
             sendBack("OK");
             ui.updateArea("Channel changed");
+        } else if ("get_status".equals(tvData.actionToPerform)){
+            sendBack("OK");
+            ui.updateArea(getStatus());
         } else{
             sendBack(BAD_COMMAND + " - " + tvData.actionToPerform);
         }

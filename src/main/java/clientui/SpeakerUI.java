@@ -20,6 +20,9 @@ public class SpeakerUI extends ClientUI{
     private JButton volumeUP;
     private JButton volumeDown;
     private JButton mute;
+    private JButton turnTVON;
+    private JButton turnTVOFF;
+    private JButton changeChannel;
     private final SpeakerClient parent;
     
 
@@ -39,10 +42,16 @@ public class SpeakerUI extends ClientUI{
         volumeUP = new JButton("VolumeUP");
         volumeDown = new JButton("VolumeDown");
         mute = new JButton("Mute");
+        turnTVON = new JButton("Turn TV ON");
+        turnTVOFF = new JButton("Turn TV OFF");
+        changeChannel = new JButton("Change TV channel");
         scroll.setBounds(5, 40, UIConstants.COMPONENTWIDTH, 300);
         add(new JButton[]{volumeUP});
         add(new JButton[]{volumeDown});
         add(new JButton[]{mute});
+        add(new JButton[]{turnTVON});
+        add(new JButton[]{turnTVOFF});
+        add(new JButton[]{changeChannel});
         
     }
 
@@ -57,6 +66,12 @@ public class SpeakerUI extends ClientUI{
             parent.volumeDown();
         } else if (e.getSource() == mute) {
             parent.speakerMute();
+        } else if (e.getSource() == turnTVON){
+            parent.turnONTV();
+        } else if (e.getSource() == turnTVOFF){
+            parent.turnOFFTV();
+        } else if (e.getSource() == changeChannel){
+            parent.changeChannel();
         }
     }
     

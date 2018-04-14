@@ -4,27 +4,28 @@
 package client;
 
 
-import clientui.LightUI;
+
+import clientui.SpeakerUI;
 
 /**
  * Bed Client.
  *
- * @author Asad
+ * @author dominic
  */
-public class LightClient extends Client {
+public class SpeakerClient extends Client {
 
-    private final String ON = "On";
-    private final String OFF = "Off";
+    private final String ON = "SpeakerOn";
+    private final String OFF = "SpeakerOff";
     private boolean turnOn = false;
 
     /**
      * Bed Client Constructor.
      */
-    public LightClient() {
+    public SpeakerClient() {
         super();
-        serviceType = "_light._udp.local.";
-        ui = new LightUI(this);
-        name = "Light";
+        serviceType = "_speaker._udp.local.";
+        ui = new SpeakerUI(this);
+        name = "Speaker";
     }
 
     /**
@@ -54,15 +55,13 @@ public class LightClient extends Client {
     public void updatePoll(String msg) {
         if (msg.equals("light is on.")) {
             turnOn = false;
-        }else if(msg.equals("light is off")){
-            turnOn = false;
         }
     }
 
     @Override
     public void disable() {
         super.disable();
-        ui = new LightUI(this);
+        ui = new SpeakerUI(this);
         turnOn = false;
     }
 }

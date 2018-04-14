@@ -8,12 +8,12 @@ import serviceui.ServiceUI;
 /**
  * The Class BedService.
  */
-public class LightService extends Service {
+public class SpeakerService extends Service {
 
     private final Timer timer;
     private int lightStatus;
-    private boolean light;
-    public LightService(String name) {
+    private boolean turnOn;
+    public SpeakerService(String name) {
         super(name, "_light._udp.local.");
         timer = new Timer();
         lightStatus = 0;
@@ -24,16 +24,16 @@ public class LightService extends Service {
     public void performAction(String a) {
         if (a.equals("get_status")) {
             sendBack(getStatus());
-        } else if (a.equals("On")) {
+        } else if (a.equals("Light On")) {
             timer.schedule(new RemindTask(), 0, 200);
             sendBack("OK");
             ui.updateArea("Light On");
-            light = true;
+            turnOn = true;
         }else if(a.equals("Off")){
             timer.schedule(new RemindTask(), 0, 200);
             sendBack("OK");
             ui.updateArea("Light off");
-            light = true;
+            turnOn = true;
         }
         else {
             sendBack(BAD_COMMAND + " - " + a);
@@ -43,33 +43,22 @@ public class LightService extends Service {
     class RemindTask extends TimerTask {
 
         @Override
-       public void run() {
-            if (light == true){
-                if (lightStatus == 0) {
-                    lightStatus += 1;
-                    light = false;
-                }
-                else if (lightStatus == 1){
-                    lightStatus -= 1;
-                    light = false;
-                }
+        public void run() {
+            if (turnOn == true) {
+                
+            }
+            else if (turnOn == false){
+                
             }
         }
     }
 
     @Override
     public String getStatus() {
-       switch (lightStatus) {
-            case 0:
-                return "Light is off";
-            case 1:
-                return "Light is on";
-            default:
-                return "Please wait";
-        }
+        return "light " + turnOn + "% is on.";
     }
 
     public static void main(String[] args) {
-        new LightService("Light");
+        new SpeakerService("Light");
     }
 }

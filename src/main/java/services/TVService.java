@@ -22,9 +22,9 @@ public class TVService extends Service{
 
     public TVService(String name) {
         super(name, "_tv._udp.local.");
-        ui = new ServiceUI(this, name);
         tvStatus = "OFF";
         channel = 0;
+        ui = new ServiceUI(this, name);
     }
 
     @Override

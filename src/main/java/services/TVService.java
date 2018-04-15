@@ -13,10 +13,8 @@ import serviceui.ServiceUI;
  *
  * @author khateebahmad
  */
-public class TVService extends Service{
-    
-    
-    
+public class TVService extends Service {
+
     private String tvStatus;
     private int channel;
 
@@ -29,49 +27,58 @@ public class TVService extends Service{
 
     @Override
     protected void performAction(String data) {
-        if("TurnOnTV".equals(data)){
+        if ("TurnOnTV".equals(data)) {
             tvStatus = "ON";
             sendBack("OK");
             ui.updateArea("TV turned ON");
-        } else if("TurnOffTV".equals(data)){
+        } else if ("TurnOffTV".equals(data)) {
             tvStatus = "OFF";
             channel = 0;
             sendBack("OK");
             ui.updateArea("TV turned OFF");
-        } else if("ChangeChannel".equals(data)){
-            channel = channel + 1; 
-            sendBack("OK");
-            ui.updateArea("Channel changed");
-        } else if ("get_status".equals(data)){
+        } else if ("ChangeChannel".equals(data)) {
+            if ("ON".equals(tvStatus)) {
+                channel = channel + 1;
+                sendBack("OK");
+                ui.updateArea("Channel changed");
+            } else {
+                sendBack("OK");
+                ui.updateArea("Channel cannot be changed. TV is Off!");
+            }
+        } else if ("get_status".equals(data)) {
             sendBack("OK");
             ui.updateArea(getStatus());
-        } else{
+        } else {
             sendBack(BAD_COMMAND + " - " + data);
         }
     }
-    
-    
+
     protected void receiveAction(String data) {
         Gson gson = new Gson();
         TVData tvData = gson.fromJson(data, TVData.class);
-         
-        if("TurnOnTV".equals(tvData.actionToPerform)){
+
+        if ("TurnOnTV".equals(tvData.actionToPerform)) {
             tvStatus = "ON";
             sendBack("OK");
             ui.updateArea("TV turned ON");
-        } else if("TurnOffTV".equals(tvData.actionToPerform)){
+        } else if ("TurnOffTV".equals(tvData.actionToPerform)) {
             tvStatus = "OFF";
             channel = 0;
             sendBack("OK");
             ui.updateArea("TV turned OFF");
-        } else if("ChangeChannel".equals(tvData.actionToPerform)){
-            channel = channel + 1; 
-            sendBack("OK");
-            ui.updateArea("Channel changed");
-        } else if ("get_status".equals(tvData.actionToPerform)){
+        } else if ("ChangeChannel".equals(tvData.actionToPerform)) {
+            if ("ON".equals(tvStatus)) {
+                channel = channel + 1;
+                sendBack("OK");
+                ui.updateArea("Channel changed");
+            } else {
+                sendBack("OK");
+                ui.updateArea("Channel cannot be changed. TV is Off!");
+            }
+        } else if ("get_status".equals(tvData.actionToPerform)) {
             sendBack("OK");
             ui.updateArea(getStatus());
-        } else{
+        } else {
             sendBack(BAD_COMMAND + " - " + tvData.actionToPerform);
         }
     }
@@ -79,9 +86,9 @@ public class TVService extends Service{
     @Override
     public String getStatus() {
         return "TV status is: " + tvStatus + " and channel is: " + channel;
-        
+
     }
-    
+
     public static void main(String[] args) {
         new TVService("SmartTV");
     }

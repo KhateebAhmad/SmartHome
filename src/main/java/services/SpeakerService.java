@@ -6,18 +6,20 @@
 package services;
 
 import com.google.gson.Gson;
+import data.LightData;
 import data.TVData;
 import serviceui.ServiceUI;
 
 /**
  *
- * @author khateebahmad
+ * @author khateebahmad and Muhammad Malik
  */
 public class SpeakerService extends Service {
 
     private int speakerVolume;
     TVService tvService = new TVService("SmartTV");
-
+    LightService lightService = new LightService("Light");
+    
     public SpeakerService(String name) {
         super(name, "_speaker._udp.local.");
         ui = new ServiceUI(this, name);
@@ -51,7 +53,10 @@ public class SpeakerService extends Service {
         } else if ("get_status".equals(action)){
             sendBack("OK");
             ui.updateArea("Speaker volume is: "+ speakerVolume);
-        }else if ("TurnOnTV".equals(action)) {
+        }
+        
+        
+        else if ("TurnOnTV".equals(action)) {
             sendBack("OK");
             tvFunctions(action);
         } else if ("TurnOffTV".equals(action)) {
@@ -60,7 +65,17 @@ public class SpeakerService extends Service {
         } else if ("ChangeChannel".equals(action)) {
             sendBack("OK");
             tvFunctions(action);
-        } else {
+        } 
+        
+        else if ("TurnOnLight".equals(action)) {
+            sendBack("OK");
+            lightFunctions(action);
+        }else if ("TurnOffLight".equals(action)) {
+            sendBack("OK");
+            lightFunctions(action);
+        }
+        
+        else {
             sendBack(BAD_COMMAND + " - " + action);
         }
     }
@@ -71,6 +86,14 @@ public class SpeakerService extends Service {
         Gson gson = new Gson();
         String params = gson.toJson(tvData);
         tvService.receiveAction(params);
+    }
+    
+     public void lightFunctions(String functionToPerform) {
+        LightData lightData = new LightData(functionToPerform);
+        //tvData.setActionToPerform(functionToPerform);
+        Gson gson = new Gson();
+        String params = gson.toJson(lightData);
+        lightService.receiveFunctions(params);
     }
 
     @Override

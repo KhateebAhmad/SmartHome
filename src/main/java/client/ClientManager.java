@@ -25,6 +25,7 @@ public class ClientManager implements ServiceListener {
         clients.add(new ClockClient());
         clients.add(new TVClient());
         clients.add(new SpeakerClient());
+        clients.add(new LightClient());
         try {
             jmdns = JmDNS.create(InetAddress.getLocalHost());
             

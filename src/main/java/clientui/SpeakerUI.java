@@ -12,7 +12,7 @@ import javax.swing.JButton;
 
 /**
  *
- * @author khateebahmad
+ * @author khateebahmad and Muhammad Malik
  */
 public class SpeakerUI extends ClientUI{
     
@@ -22,6 +22,8 @@ public class SpeakerUI extends ClientUI{
     private JButton mute;
     private JButton turnTVON;
     private JButton turnTVOFF;
+    private JButton turnLightON;
+    private JButton turnLightOFF;
     private JButton changeChannel;
     private final SpeakerClient parent;
     
@@ -45,6 +47,8 @@ public class SpeakerUI extends ClientUI{
         turnTVON = new JButton("Turn TV ON");
         turnTVOFF = new JButton("Turn TV OFF");
         changeChannel = new JButton("Change TV channel");
+        turnLightON = new JButton("Turn Light ON");
+        turnLightOFF = new JButton("Turn Light OFF");
         scroll.setBounds(5, 40, UIConstants.COMPONENTWIDTH, 300);
         add(new JButton[]{volumeUP});
         add(new JButton[]{volumeDown});
@@ -52,6 +56,9 @@ public class SpeakerUI extends ClientUI{
         add(new JButton[]{turnTVON});
         add(new JButton[]{turnTVOFF});
         add(new JButton[]{changeChannel});
+        add(new JButton[]{turnLightON});
+        add(new JButton[]{turnLightOFF});
+        
         
     }
 
@@ -72,6 +79,10 @@ public class SpeakerUI extends ClientUI{
             parent.turnOFFTV();
         } else if (e.getSource() == changeChannel){
             parent.changeChannel();
+        } else if (e.getSource() == turnLightON){
+            parent.turnONLight();
+        }else if (e.getSource() == turnLightOFF){
+            parent.turnOFFLight();
         }
     }
     

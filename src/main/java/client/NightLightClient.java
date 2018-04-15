@@ -22,7 +22,7 @@ public class NightLightClient extends Client {
      */
     public NightLightClient() {
         super();
-        serviceType = "_light._udp.local.";
+        serviceType = "_nightlight._udp.local.";
         ui = new NightLightUI(this);
         name = "Nightlights";
     }

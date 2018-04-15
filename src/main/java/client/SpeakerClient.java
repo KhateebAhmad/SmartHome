@@ -7,9 +7,10 @@ package client;
 
 import clientui.SpeakerUI;
 
+
 /**
  *
- * @author khateebahmad
+ * @author Muhammad Malik and khateebahmad
  */
 public class SpeakerClient extends Client{
     
@@ -19,6 +20,9 @@ public class SpeakerClient extends Client{
     private final String TURNONTV = "TurnOnTV";
     private final String TURNOFFTV = "TurnOffTV";
     private final String CHANGE_CHANNEL = "ChangeChannel";
+    private final String TURNONLight = "TurnOnLight";
+    private final String TURNOFFLight = "TurnOffLight";
+    
     
     /**
      * Speaker Client Constructor.
@@ -79,7 +83,7 @@ public class SpeakerClient extends Client{
                 ui.updateArea("Turning TV OFF");
             }
     }
-
+    
     /**
      * sends a message to change TV channel.
      */
@@ -89,6 +93,29 @@ public class SpeakerClient extends Client{
                 ui.updateArea("Changing Channel");
             }
     }
+    
+     /**
+     * sends a message to turn Light ON.
+     */
+     public void turnONLight() {
+            String a = sendMessage(TURNONLight);
+            if (a.equals(OK)) {
+                ui.updateArea("Turning Light ON");
+            }
+    }
+    
+    /**
+     * sends a message to turn Light OFF.
+     */
+    public void turnOFFLight() {
+            String a = sendMessage(TURNOFFLight);
+            if (a.equals(OK)) {
+                ui.updateArea("Turning Light OFF");
+            }
+    }
+    
+
+    
     
     
     @Override

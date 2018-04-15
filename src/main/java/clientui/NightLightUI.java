@@ -10,9 +10,9 @@ public class NightLightUI extends ClientUI {
     public JButton on;
     private final NightLightClient parent;
 
-    public NightLightUI(NightLightClient lightClient) {
-        super(lightClient);
-        parent = lightClient;
+    public NightLightUI(NightLightClient nightLightClient) {
+        super(nightLightClient);
+        parent = nightLightClient;
         init();
     }
 

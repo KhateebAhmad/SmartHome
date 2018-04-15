@@ -22,7 +22,7 @@ public class NightLightService extends Service {
     private boolean allow;
 
     public NightLightService(String name) {
-        super(name, "_light._udp.local.");
+        super(name, "_nightlight._udp.local.");
         timer = new Timer();
         //lightStatus key 0 = off, 1 = on
         lightStatus = 0;

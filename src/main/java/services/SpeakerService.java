@@ -90,7 +90,6 @@ public class SpeakerService extends Service {
     
      public void lightFunctions(String functionToPerform) {
         LightData lightData = new LightData(functionToPerform);
-        //tvData.setActionToPerform(functionToPerform);
         Gson gson = new Gson();
         String params = gson.toJson(lightData);
         lightService.receiveFunctions(params);
